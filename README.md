@@ -97,7 +97,7 @@ Prettier allows us to reformat the code.
 
 In first install [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extension.
 
-Install Prettier
+Install Prettier.
 
 ```bash
 npm i -D prettier
@@ -107,9 +107,9 @@ npm i -D prettier
 
 ### <a name="prettier-config"></a>Prettier Config
 
-Create the prettier file .prettierrc
+Create the prettier file *.prettierrc*.
 
-write this properties 
+Write this properties. 
 
 ```js
 {
@@ -123,13 +123,13 @@ write this properties
 ```
 ### <a name="eslint-config"></a>ESLint Config
 
-Now we can configure eslint 
+Now we can configure eslint. 
 
-first install the plugins for prettier.
+First install the plugins for prettier.
 
 `npm i -D eslint-plugin-prettier eslint-config-prettier`
 
-now extend dependecies required in the .eslintrc file
+Now extend dependecies required in the .eslintrc file.
 
 ```javascript
 {
@@ -145,7 +145,7 @@ now extend dependecies required in the .eslintrc file
 }
 ```
 
-and add the plugin we need
+And add the plugin we need.
 
 ```javascript
 {
@@ -153,7 +153,7 @@ and add the plugin we need
 }
 ```
 
-Add the rule
+Add the rule.
 
 ```javascript
 rules: {
@@ -168,13 +168,13 @@ rules: {
 },
 ```
 
-Add the additional import for typescript
+Add the additional import for typescript.
 
 ```bash
 npm i -D eslint-import-resolver-typescript tsconfig-paths
 ```
 
-refactor the .eslintrc file with previous rules and new rules.
+Refactor the .eslintrc file with previous rules and new rules.
 
 ```javascript
 {
@@ -206,7 +206,7 @@ refactor the .eslintrc file with previous rules and new rules.
 
 ### <a name="typescript-config"></a>TypeScript Config
 
-Configure the tsconfig.json with this properties:
+Configure the tsconfig.json with this properties.
 
 ```js
 {
@@ -252,17 +252,17 @@ Reload the vscode window so that eslint updates the new rules. Enter the command
 
 After that create the *src* folder.
 
-create a file index.ts in to the *src* for test the Prettier formatage
+Create a file index.ts in to the *src* for test the Prettier formatage.
 
-create a folder in *src* with name math, and add a file *add.ts*
+Create a folder in *src* with name math, and add a file *add.ts*.
 
-afterwards test the import export with a the add.ts and the index.ts
+Afterwards test the import export with a the add.ts and the *index.ts*.
 
 Note: After that you can delete the file and folder in src. We created it to see if everything works well.
 
-Add the script for the package.json
+Add the script for the *package.json*.
 
-the *start:dev* script will run the code from the ts file and *start:prod' will run the js code after transpilling.
+The *start:dev* script will run the code from the ts file and *start:prod' will run the js code after transpilling.
 
 ```js
 "scripts": {
@@ -272,9 +272,9 @@ the *start:dev* script will run the code from the ts file and *start:prod' will 
 }
 ```
 
-run the script `npm run start:dev` for see its all ok if we have the result of the addition.
+Run the script `npm run start:dev` for see its all ok if we have the result of the addition.
 
-run the script `npm run build` for transpile typescript file to javascript.
+Run the script `npm run build` for transpile typescript file to javascript.
 
 
 ## <a name="installation-and-config"></a>Installation and config additional
@@ -287,7 +287,7 @@ Install nodemon for automatic rerun of our code to see the change without runnin
 npm i -D nodemon
 ```
 
-create a *nodemon.json* file for config specific rules.
+Create a *nodemon.json* file for config specific rules.
 
 ```json
 {
@@ -310,8 +310,8 @@ Install dotenv-safe for our environment variables, these dependencies can go in 
 
 `npm i dotenv-safe`
 
-Create 2 files *.env* and ".env.example"
-the first contains our environment variable and the second the variable without our information, but just an example of the values ​​we expect to receive.
+Create 2 files *.env* and *.env.example*.
+The first contains our environment variable and the second the variable without our information, but just an example of the values ​​we expect to receive.
 
 After that import and configure dotenv.
 
@@ -331,7 +331,7 @@ Install Jest with this command.
 
 So with jest we install its library and ts-jest is the runtime for jest and @types/jest are the type definitions for jest.
 
-ensuite create the file of configuration with command. 
+Then create the file of configuration with command.
 
 `npx ts-jest config:init`
 
@@ -369,7 +369,7 @@ Now go back on *.eslintrc* and extend Jest.
 
 Restart the vscode window to load the new configuration.
 
-Now we can see that everything is ok, create a folder *__tests__* and as file add.test.ts.
+Now we can see that everything is ok, create a folder *__tests__* and as file *add.test.ts*.
 
 Add the script for run jest.
 
@@ -389,7 +389,7 @@ Then run the build command.
 
 EditorCofing allows us to have the same setting no matter which IDE we use and adds a bit more subtlety than Prettier.
 
-So create a file .editorconfig and add this rules.
+So create a file *.editorconfig* and add this rules.
 
 ```js
 [*]
@@ -419,8 +419,8 @@ Configure rules.
 }
 ```
 
-Add the flag "-p tsconfig.prod.json" to the build script 
+Add the flag `-p tsconfig.prod.json` to the build script. 
 
-Now we run the build script and in the transpile file we can only have the file needed for the programs
+Now we run the build script and in the transpile file we can only have the file needed for the programs.
 
 We have henceforth a starter with reliability and consistent !

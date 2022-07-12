@@ -38,7 +38,7 @@ This template includes:
 
 Avoid certain files and folders with .gitignore:
 
-```json
+```bash
 dist
 node_modules
 coverage
@@ -111,7 +111,7 @@ Create the prettier file .prettierrc
 
 write this properties 
 
-```json
+```js
 {
   "tabWidth": 2, // space from the start of the line
   "printWidth": 120, //how much caractere by line
@@ -208,7 +208,7 @@ refactor the .eslintrc file with previous rules and new rules.
 
 Configure the tsconfig.json with this properties:
 
-```json
+```js
 {
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
@@ -264,7 +264,7 @@ Add the script for the package.json
 
 the *start:dev* script will run the code from the ts file and *start:prod' will run the js code after transpilling.
 
-```json
+```js
 "scripts": {
   "start:dev": "ts-node -r tsconfig-paths/register ./src/index.ts",
   "start:prod": "node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/src/index.js",
@@ -391,7 +391,7 @@ EditorCofing allows us to have the same setting no matter which IDE we use and a
 
 So create a file .editorconfig and add this rules.
 
-```json
+```js
 [*]
 end_of_line = lf
 indent_size = 2

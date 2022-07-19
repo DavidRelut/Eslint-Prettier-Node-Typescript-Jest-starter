@@ -15,22 +15,22 @@ This template includes:
 
 ## Table of Contents
 
-1. [Initialization](#initialize-project)
+1. [Initialization](#Initialize-project)
 2. [Installation and Usage](#installation-and-usage)
-    * [Typescript Install](#typescript-install)
-    * [ESLint Install](#eslint-install)
-    * [Pretier Install](#prettier-install)
-3. [Configuration](#configuration)
-    * [Prettier Config](#prettier-config)
-    * [ESLint Config](#eslint-config)
-    * [TypeScript Config](#typescript-config)
-    * [Testing Project Configurations](#testing-project-configurations)
-4. [Installation and config additional](#installation-and-config)
-    * [Nodemon install and config](#nodemon-install-and-config)
-    * [Dotenv-safe install and config](#dotenv-safe-install-and-config)
-    * [Jest install and config](#jest-install-and-config)
-    * [EditorConfig](#editorconfig)
-5. [Exclude tests from the build](#exclude-tests-from-build)
+  * [Typescript Install](#typescript-install)
+  * [ESLint Install](#eslint-install)
+  * [Pretier Install](#prettier-install)
+2. [Configuration](#configuration)
+  * [Prettier Config](#prettier-config)
+  * [ESLint Config](#eslint-config)
+  * [TypeScript Config](#typescript-config)
+  * [Testing Project Configurations](#testing-project-configurations)
+3. [Installation and config additional](#installation-and-config)
+  * [Nodemon install and config](#nodemon-install-and-config)
+  * [Dotenv-safe install and config](#dotenv-safe-install-and-config)
+  * [Jest install and config](#jest-install-and-config)
+  * [EditorConfig](#editorconfig)
+4. [Exclude tests from the build](#exclude-tests-from-build)
 
 <br/>
 

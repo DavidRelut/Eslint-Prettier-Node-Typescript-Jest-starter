@@ -1,426 +1,137 @@
-# Eslint Prettier Node Typescript Jest starter
+# REST API -> Express Typescript Jest with Sequelize + MySQL and Husky
 
-Kick off your project with this Eslint Prettier Node Typescript Jest starter.
+I use for this project :
 
-You can use this template to build a new project or to practice Katas.
-
-This template includes:
-
-* ESLint
-* Prettier
-* Node
+* Express
 * TypeScript
 * Jest
+* Sequelize
+* MySQL (MariaDB)
 
 
-## Table of Contents
+First thing, install ESLint Prettier Node Typescript Jest starter + node_modules with the dependencies, we will config in the starter.
 
-1. [Initialization](#initialize-project)
-2. [Installation and Usage](#installation-and-usage)
-    * [Typescript Install](#typescript-install)
-    * [ESLint Install](#eslint-install)
-    * [Pretier Install](#prettier-install)
-3. [Configuration](#configuration)
-    * [Prettier Config](#prettier-config)
-    * [ESLint Config](#eslint-config)
-    * [TypeScript Config](#typescript-config)
-    * [Testing Project Configurations](#testing-project-configurations)
-4. [Installation and config additional](#installation-and-config)
-    * [Nodemon install and config](#nodemon-install-and-config)
-    * [Dotenv-safe install and config](#dotenv-safe-install-and-config)
-    * [Jest install and config](#jest-install-and-config)
-    * [EditorConfig](#editorconfig)
-5. [Exclude tests from the build](#exclude-tests-from-build)
+```bash
+gh repo clone DavidRelut/Eslint-Prettier-Node-Typescript-Jest-starter
+
+npm install || npm install -g node-modules
+npm audit fix --force
+```
+
+# 📝 Table of Contents
+1. [Installation & Usage](#installation-and-usage)
+2. [Project structure](#project-structure)
+    * [Configure Environment variables](#configure-environnemnt-variables)
+    * [Organize with MVC](#organize-with-mvc)
+    * [Entry Point + Server connection](#main-endpoint-and-server-connection)
+3. [Connect Sequelize MariaDB with REST API](#connect-sequelize-mariadb-with-rest-api)
+    * [Controllers](#conntrollers)
+    * [Routes](routes)
+    * [Install Sequelize with Typecript](#install-sequelize-with-typescript)
+    * [Models with Sequelize](#models-with-sequelize)
+    * [Connection Database with Sequelize](#connection-database-with-sequelize)
+4. [Testing with Jest](#testing-with-jest)
 
 <br/>
 
-## <a name="initialize-project"></a>Initialize Project
 
-Avoid certain files and folders with .gitignore:
+## <a name="installation-and-usage"></a>Installation & Usage
 
-```bash
-dist
-node_modules
-coverage
-.env
-```
-
-Now we can start !
+Install Express and these definition types.
+These dependencies with *dotenv* will go into production.
 
 ```bash
-npm init -y
+npm i express --save
+npm i -D @types/express
 ```
 
-We use the `-y` flag to skip all questions.
+## <a name="project-structure"></a>Project structure
+### <a name="configure-environnemnt-variables"></a>Configure Environment variables
 
-## <a name="installation-and-usage"></a>Installation and Usage
-
-To link our project with our version of node.
-
-```bash
-node -v > .node-version
-```
-
-### <a name="typescript-install"></a>Typescript Install
-
-```bash
-npm i -D typescript ts-node @types/node
-```
-
-```bash
-npx tsc --init
-```
-
-### <a name="eslint-install"></a>ESLint Install
-
-First install the [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) extension.
-
-```bash
-npm i -D eslint
-```
-
-```bash
-npx eslint --init
-```
-
-Answer the question according to your preferences.
-
-Create a eslintigonre file for ignore file and folder we don't need tp be linted.
-
-```bash
-touch .eslintignore
-```
-
-### <a name="prettier-install"></a>Prettier Install
-
-Prettier allows us to reformat the code.
-
-In first install [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) extension.
-
-Install Prettier.
-
-```bash
-npm i -D prettier
-```
-
-## <a name="configuration"></a>Configuration
-
-### <a name="prettier-config"></a>Prettier Config
-
-Create the prettier file *.prettierrc*.
-
-Write this properties. 
+Create a *.env* file.
+Your *.env* file should look like this with the values ​​from your database.
 
 ```js
-{
-  "tabWidth": 2, // space from the start of the line
-  "printWidth": 120, //how much caractere by line
-  "singleQuote": true, // change double quote to single quote
-  "trailingComma": "es5", // 
-  "arrowParens": "avoid",
-  "semi": true
-}
-```
-### <a name="eslint-config"></a>ESLint Config
-
-Now we can configure eslint. 
-
-First install the plugins for prettier.
-
-`npm i -D eslint-plugin-prettier eslint-config-prettier`
-
-Now extend dependecies required in the .eslintrc file.
-
-```javascript
-{
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'airbnb-base',
-    'plugin:prettier/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
-  ]
-}
+PORT=
+DB_HOST=
+DB_NAME=
+DB_PORT=
+DB_USER=
+DB_PASSWORD=
 ```
 
-And add the plugin we need.
+Now we may begin to configure our router.
 
-```javascript
-{
-  plugins: ['@typescript-eslint', 'prettier', 'import']
-}
-```
+### <a name="organize-with-mvc"></a>Organize with MVC
 
-Add the rule.
+Organize our source code with the MVC design pattern without use the view for this project.
 
-```javascript
-rules: {
-  'prettier/prettier': [
-    'error',
-    {
-      endOfLine: 'auto',
-    },
-  ],
-  'import/extensions': 'off',
-  'no-console': 'off',
-},
-```
+We split the responsability, in the source folder add these folders -> *controllers*, *db*, *models*, *routes*
+ * *controllers* folder for 
+ * *db* folder for the Database connection.
+ * *models* folder for cherhcer les données dans la DB
+ * *routes* folder for traiter l'appel à la bdd est donc au model est les requete de l'user et renver la route demmander avec les données. (aussi appeller controllers).
 
-Add the additional import for typescript.
+### <a name="entry-point-and-server-connection"></a>Entry Point + Server connection
 
-```bash
-npm i -D eslint-import-resolver-typescript tsconfig-paths
-```
+Create a *app.ts* file and src folder.
 
-Refactor the .eslintrc file with previous rules and new rules.
+First import dotenv and express to use their methods, then configure dotenv to use the previously defined environment variables.
 
-```javascript
-{
-  rules: {
-    'import/order': [
-      'error',
-      {
-        'newlines-between': 'never',
-        groups: [
-          ['builtin', 'external'],
-          ['internal', 'parent', 'sibling', 'index'],
-        ],
-      },
-    ],
-  },
-  settings: {
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts'],
-    },
-    'import/resolver': {
-      typescript: {
-        alwaysTryTypes: true,
-        project: './tsconfig.json',
-      },
-    },
-  },
-};
-```
-
-### <a name="typescript-config"></a>TypeScript Config
-
-Configure the tsconfig.json with this properties.
-
-```js
-{
-  "compilerOptions": {
-    /* Visit https://aka.ms/tsconfig to read more about this file */
-    /* Basic Options */
-    "target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
-    "module": "commonjs", /* Specify what module code is generated. */
-    "lib": ["esnext", "dom"],                /* Specify a set of bundled library declaration files that describe the target runtime environment. */
-    "allowJs": true,                         /* Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files. */
-    "outDir": "./dist",                      /* Specify an output folder for all emitted files. */
-    "rootDir": "./",                         /* Specify the root folder within your source files. */
-    "removeComments": true,                  /* Disable emitting comments. */
-    
-    /* Strict Type Checking Options */
-    "strict": true                           /* Enable all strict type-checking options. */,
-    "noImplicitAny": true,                   /* Enable error reporting for expressions and declarations with an implied 'any' type. */
-    
-    /* Modules Resolution Options */
-    "moduleResolution": "node",              /* Specify how TypeScript looks up a file from a given module specifier. */
-    "baseUrl": "./",                         /* Specify the base directory to resolve non-relative module names. */
-    "paths": {
-      "@src/*": ["src/*"]
-      },                                     /* Specify a set of entries that re-map imports to additional lookup locations. */
-      "esModuleInterop": true                /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
-      
-    /* Experimental Options */
-    "experimentalDecorators": true,          /* Enable experimental support for TC39 stage 2 draft decorators. */
-    "emitDecoratorMetadata": true,           /* Emit design-type metadata for decorated declarations in source files. */
-    
-    /* Advanced Options */
-    "skipLibCheck": true,                     /* Skip type checking all .d.ts files. */
-    "forceConsistentCasingInFileNames": true  /* Ensure that casing is correct in imports. */
-  },
-  "exclude": ["node_modules", "dist", "coverage"],
-  "include": ["src"]
-}
-```
-
-### <a name="testing-project-configurations"></a>Testing Project Configurations
-
-Reload the vscode window so that eslint updates the new rules. Enter the command *ctrl shift p* on vscode.
-
-After that create the *src* folder.
-
-Create a file index.ts in to the *src* for test the Prettier formatage.
-
-Create a folder in *src* with name math, and add a file *add.ts*.
-
-Afterwards test the import export with a the add.ts and the *index.ts*.
-
-Note: After that you can delete the file and folder in src. We created it to see if everything works well.
-
-Add the script for the *package.json*.
-
-The *start:dev* script will run the code from the ts file and *start:prod' will run the js code after transpilling.
-
-```js
-"scripts": {
-  "start:dev": "ts-node -r tsconfig-paths/register ./src/index.ts",
-  "start:prod": "node -r ts-node/register/transpile-only -r tsconfig-paths/register ./dist/src/index.js",
-  "build": tsc
-}
-```
-
-Run the script `npm run start:dev` for see its all ok if we have the result of the addition.
-
-Run the script `npm run build` for transpile typescript file to javascript.
-
-
-## <a name="installation-and-config"></a>Installation and config additional
-
-### <a name="nodemon-install-and-config"></a>Nodemon install and config
-
-Install nodemon for automatic rerun of our code to see the change without running the same script multiple times.
-
-```bash
-npm i -D nodemon
-```
-
-Create a *nodemon.json* file for config specific rules.
-
-```json
-{
-  "watch": ["src"],
-  "ext": "ts,js,json",
-  "ignore": ["node_modules", "coverage", "dist"],
-  "exec": "ts-node -r tsconfig-paths/register ./src/index.ts",
-  "restartable": "rs",
-  "env": {
-    "NODE_ENV": "development"
-  }
-}
-```
-
-We can refactor the script *start:dev* and simply make nodemon in value, because we config this rules and more.
-
-### <a name="Dotenv-safe-install-and-config"></a>Dotenv-safe install and config
-
-Install dotenv-safe for our environment variables, these dependencies can go in prod, that's why we install it in dependencies and not in devDependencies.
-
-`npm i dotenv-safe`
-
-Create 2 files *.env* and *.env.example*.
-The first contains our environment variable and the second the variable without our information, but just an example of the values ​​we expect to receive.
-
-After that import and configure dotenv.
-
-```javascript
+```typescript
 import dotenv from 'dotenv-safe';
+import express, { Application, Request, Response, json, urlencoded } from 'express';
 
 dotenv.config();
-
-console.log(process.env.MY_NAME);
+const app: Application = express();
 ```
 
-### <a name="Jest-install-and-config"></a>Jest install and config
+Secondly use the middleware for parse the data in json.
+`express.json()` replaces `bodyParser.json()`. It allows to read the body of the requests and to parse them.
 
-Install Jest with this command.
-
-`npm i -D jest ts-jest @types/jest`
-
-So with jest we install its library and ts-jest is the runtime for jest and @types/jest are the type definitions for jest.
-
-Then create the file of configuration with command.
-
-`npx ts-jest config:init`
-
-In the file.
-
-```javascript
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  coverageDirectory: 'coverage',
-  collectCoverageFrom: ['src/**/*.(jd,ts)'],
-  coverageThreshold: {
-    global: {
-      branches: 0,
-      functions: 0,
-      lines: 0,
-      statements: 0,
-    },
-  },
-  moduleNameMapper: {
-    'src/(.*)': '<rootDir>/src/$1',
-  },
-  moduleDirectories: ['node_modules', 'src'],
-};
-```
-Now go back on *.eslintrc* and extend Jest.
-
-```javascript
-{
-  env: {
-    jest: true,
-  },
-};
+```typescript
+app.use(json())
+app.use(urlencoded({ extended: true }));
 ```
 
-Restart the vscode window to load the new configuration.
+Thirdly, use the express method for creating our entry point and the server connection.
 
-Now we can see that everything is ok, create a folder *__tests__* and as file *add.test.ts*.
+```typescript
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello TS');
+});
 
-Add the script for run jest.
-
-```json
-{
-  "scripts": {
-    "test": "jest",
-    "test-watch": "jest --watchAll --verbose",
-    "test:coverage": "jest --coverage"
-  },
-}
+app.listen(process.env.PORT, () => {
+  console.log(`Server Express with Typescript is running on port ${process.env.PORT}`)
+})
 ```
 
-Then run the build command.
+## <a name="connect-sequelize-mariadb-with-rest-api"></a>Connect Sequelize MariaDB with REST API
+### <a name="controllers"></a>Controllers
 
-### <a name="editorconfig"></a>EditorConfig
+### <a name="routes"></a>Routes
 
-EditorCofing allows us to have the same setting no matter which IDE we use and adds a bit more subtlety than Prettier.
+### <a name="install-sequelize-with-typescript"></a>Install Sequelize with Typescript
 
-So create a file *.editorconfig* and add this rules.
+Install required package sequelize and the driver of your choice here it will be mariadb.
 
-```js
-[*]
-end_of_line = lf
-indent_size = 2
-indent_style = space
-trim_trailing_whitespace = true
-insert_final_newline = true
-
-[Makefile]
-indent_style = tab
-indent_size = 4
+```bash
+npm i sequelize sequelize-typescript mariadb --save
+npm i -D @types/sequelize
 ```
 
-A last thing !
+### <a name="models-with-sequelize"></a>Models with Sequelize
 
-## <a name="exclude-tests-from-build"></a>Exclude tests from build
+We import sequelize-typescript to use types with sequelize for models.
 
-Create file *tsconfig.prod.json*
-
-Configure rules.
-
-```json
-{
-  "extends": "./tsconfig",
-  "exclude": ["src/__tests__", "**/*.test.ts", "**/*.mock.ts"]
-}
+```typescript
+import { Table, Model, Column, DataType } from "sequelize-typescript";
 ```
 
-Add the flag `-p tsconfig.prod.json` to the build script. 
+### <a name="connection-database-with-sequelize"></a>Connection Database with Sequelize
 
-Now we run the build script and in the transpile file we can only have the file needed for the programs.
+```typescript
+import { Sequelize } from "sequelize-typescript";
+```
 
-We have henceforth a starter with reliability and consistent !
+## <a name="testing-with-jest"></a>Testing with Jest
